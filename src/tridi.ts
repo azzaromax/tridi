@@ -40,7 +40,7 @@ interface TridiOptions {
   onViewerImageGenerate?: Function | undefined;
   onViewerImageUpdate?: Function | undefined;
   onHintShow?: Function | undefined;
-  onHintHide?: Function | undefined; 
+  onHintHide?: Function | undefined;
   onLoadingScreenShow: Function | undefined;
   onLoadingScreenHide: Function | undefined;
   onImagesPreload?: Function | undefined;
@@ -180,7 +180,7 @@ class Tridi {
 
   private setElementName() {
     const el = this.element;
-  
+
     if (typeof el === "string") return el.substr(1);
     if (el.getAttribute("id")) return el.getAttribute("id")!;
     if (el.getAttribute("class")) return el.getAttribute("class")!.split(" ")[0];
@@ -475,8 +475,8 @@ class Tridi {
   }
 
   private rotateViewerImage(e: MouseEvent | TouchEvent) {
-    const touch = (e as TouchEvent).touches;
-    const interval = (touch ? this.touchDragInterval : this.dragInterval)!;
+    //const touch = (e as TouchEvent).touches;
+    //const interval = (touch ? this.touchDragInterval : this.dragInterval)!;
 
     const eventX = (e as TouchEvent).touches
       ? (e as TouchEvent).touches[0].clientX
@@ -492,13 +492,12 @@ class Tridi {
       this.moveBuffer[0] = tmp;
     }
 
-    const threshold = !(coord % interval);
     const oldMove = this.moveBuffer[0];
     const newMove = this.moveBuffer[1];
 
-      if (threshold && (newMove < oldMove)) {
+      if (newMove < oldMove) {
         this.nextMove();
-      } else if (threshold && (newMove > oldMove)) {
+      } else if (newMove > oldMove) {
         this.prevMove();
       }
   }

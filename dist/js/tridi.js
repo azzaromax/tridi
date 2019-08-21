@@ -294,8 +294,8 @@ var Tridi = /** @class */ (function () {
         return this.inverse ? this.nextFrame() : this.prevFrame();
     };
     Tridi.prototype.rotateViewerImage = function (e) {
-        var touch = e.touches;
-        var interval = (touch ? this.touchDragInterval : this.dragInterval);
+        //const touch = (e as TouchEvent).touches;
+        //const interval = (touch ? this.touchDragInterval : this.dragInterval)!;
         var eventX = e.touches
             ? e.touches[0].clientX
             : e.clientX;
@@ -308,13 +308,12 @@ var Tridi = /** @class */ (function () {
             this.moveBuffer[1] = coord;
             this.moveBuffer[0] = tmp;
         }
-        var threshold = !(coord % interval);
         var oldMove = this.moveBuffer[0];
         var newMove = this.moveBuffer[1];
-        if (threshold && (newMove < oldMove)) {
+        if (newMove < oldMove) {
             this.nextMove();
         }
-        else if (threshold && (newMove > oldMove)) {
+        else if (newMove > oldMove) {
             this.prevMove();
         }
     };
